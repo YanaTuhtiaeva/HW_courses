@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="build/css/all.css">
+	<script src="build/js/script.js"></script>
+	<title>HW6</title>
+</head>
+<body>
+	<header>
+		<div class="wripper">
+			<div class="logo">
+				<h1>Wisdom Pet Medicine</h1>
+			</div>
+		</div>
+	</header>
+	<section class="main">
+		<div class="wripper">
+		<form>
+			<div class="headerForm">&#10010; Add Appointment</div>
+			<div class="wripperInputs">
+				<div class="error"></div>
+				<p class="inputRow">
+					<label for="petName">Pet Name</label>
+					<input type="text" id="petName" name="Pet Name" placeholder="Pet's Name">
+				</p>
+				<p class="inputRow">
+					<label for="petOwner">Pet Owner</label>
+					<input type="text" id="petOwner" name="Pet Owner" placeholder="Owner's Name">
+				</p>
+				<p class="inputRow">
+					<span class="wripperInput">
+						<label for="date">Date</label>
+						<input type="date" id="date" name="Date">
+					</span>
+					<span class="wripperInput">
+						<label for="time">Time</label>
+						<input type="time" id="time" name="Time" placeholder="Pet Name">
+					</span>
+				</p>
+				<p class="inputRow">
+					<label for="notes">Apt.Notes</label>
+					<textarea name="Apt.Notes" id="notes" cols="30" rows="10" placeholder="Appointment Notes"></textarea>
+				<p class="inputRow">
+					<input type="submit" value="Add Appointment">
+				</p>
+			</div>
+		</form>
+	</div>
+	</section>
+	 <section class="search">
+    	 <div class="wripper wripper_search">
+            <input type="search" placeholder="Search">
+            <select name="select" id="">
+            	<option>Sort by:</option>
+            	<option value="name">Pet Name</option>
+            	<option value="owner">Pet Owner</option>
+            	<option value="date">Date</option>
+            </select>
+        </div>
+    </section>
+	<section class="list">
+		<div class="wripper">
+		</div>
+	</section>
+</body>
+</html>
