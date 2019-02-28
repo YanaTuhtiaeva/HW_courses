@@ -90,15 +90,28 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	//функция поиска
-	search.oninput = function getSearch() {
-		var searchValue = search.value.trim();
-		if (searchValue == "") {
-			createListPets(arrPets);
-			return;	
-		}
-		var newArrPets = arrPets.filter(function(temp){
-			if (isNameContains(searchValue.toLowerCase(), temp.name.toLowerCase())) {
-				return temp;
+	// search.oninput = function getSearch() {
+	// 	var searchValue = search.value.trim();
+	// 	if (searchValue == "") {
+	// 		createListPets(arrPets);
+	// 		return;	
+	// 	}
+	// 	var newArrPets = arrPets.filter(function(temp){
+	// 		if (isNameContains(searchValue.toLowerCase(), temp.name.toLowerCase())) {
+	// 			return temp;
+	// 		}
+			
+	// 	});
+
+	// 	createListPets(newArrPets);
+	// }
+
+	search.onkeyup = function() {
+		var searchValue = search.value;
+		var newArrPets = arrPets.filter(function(item){
+			if (item.name.toLowerCase().indexOf(searchValue.toLowerCase()) != -1 ||
+			item.owner.toLowerCase().indexOf(searchValue.toLowerCase()) != -1 ) {
+				return true;
 			}
 			
 		});
@@ -108,18 +121,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 	//сравнение 
-	function isNameContains(fromInput, fromName){
-		var result = false;
-		for (var i = 0; i < fromInput.length; i++) {
-			if (fromInput[i] == fromName[i]) {
-				result = true;
-			}
-			else{
-				return false
-			}
-		}
-		return result;
-	}
+	// function isNameContains(fromInput, fromName){
+	// 	var result = false;
+	// 	for (var i = 0; i < fromInput.length; i++) {
+	// 		if (fromInput[i] == fromName[i]) {
+	// 			result = true;
+	// 		}
+	// 		else{
+	// 			return false
+	// 		}
+	// 	}
+	// 	return result;
+	// }
 
 	//выводит объекты
 	function createListPets(arrayPets) {
@@ -211,9 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 select.onchange = function(event){
-		//var selectValue = select.options[select.selectedIndex].value;
-
-        // собственная функция для сортировки массива объектов
+		// собственная функция для сортировки массива объектов
        var selectParam = select.options[select.selectedIndex].value;
 		function compareObj(a,b) {
 			if (a[selectParam].toLowerCase() > b[selectParam].toLowerCase()) return 1;
@@ -224,4 +235,4 @@ select.onchange = function(event){
         createListPets(arrPets);
     }
 
-    })
+})
