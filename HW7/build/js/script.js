@@ -47,11 +47,10 @@ function createOneNoteMarkup(item, index){
         updateMarkup();
     }
 
-        tempNote.ondblclick = function addTextArea() {
-	
-	if(tempNote.querySelectorAll("textarea").length != 0) {
-		return;
-	}
+    tempNote.ondblclick = function addTextArea() {
+	   	if(tempNote.querySelectorAll("textarea").length != 0) {
+    	return;
+    }
 	else {
         tempNote.appendChild(textArea);
         textArea.style.display = "block";
@@ -70,7 +69,7 @@ function createOneNoteMarkup(item, index){
 }
     return tempNote;
 }
-// функция благодая которой работает перетягивание
+// функция благодаря которой работает перетягивание
 function getMouse(e){
     var mouseX = e.pageX;
     var mouseY = e.pageY;
