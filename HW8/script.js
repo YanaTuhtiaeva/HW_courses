@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		console.log(xhr.response);
 		var cityName = xhr.response.city.name;
 		var bodyWeather = document.querySelector('.bodyWeather');
+		var nameAndTime = document.querySelector('.nameAndTime');
+		var temperature = document.querySelector('.temperature');
+		var direct = document.querySelector('.direct');
+		var speed = document.querySelector('.speed');
+
 			
 		arrWeather = [];
 		for (var i = 0; i< xhr.response.list.length; i +=8) {
@@ -25,19 +30,47 @@ document.addEventListener('DOMContentLoaded', function () {
 	function createItemWeather(item) {
 		var itemDiv = document.createElement('div');
 		itemDiv.className = "item";
-		var time = item.time;
-		var temprt = item.temperature;
-		itemDiv.textContent = time + " " + temprt;
+		var itemDivTime = document.createElement('div');
+		var itemDivTemprt = document.createElement('div');
+		itemDivTime.textContent = item.time;
+		itemDivTemprt.innerHTML = Math.round(item.temperature - 273) + " C" + "&#176;";
+		itemDiv.appendChild(itemDivTime);
+		itemDiv.appendChild(itemDivTemprt);
 		return itemDiv;
 	}
 
 		//функция вывода на элементов на экран
 
 	function createMarkup() {
+		var nameDiv = document.createElement('div');
+		var timeDiv = document.createElement('div');
+		var temprDiv = document.createElement('div');
+		nameDiv.textContent = cityName +", "+"BY";
+		timeDiv.textContent = arrWeather[0].time.slice(10,16);
+		temprDiv.innerHTML = Math.round((arrWeather[0].temperature) - 273) + " C" + "&#176;";
+		var switchWindDirection = arrWeather[0].windDirection;
+		if (switchWindDirection >=180 && switchWindDirection <=270) {
+			direct.textContent = "South";
+		}
+		else if (switchWindDirection >=271 && switchWindDirection <=360) {
+			direct.textContent = "West";
+		}
+
+		else if (switchWindDirection >=0 && switchWindDirection <=90) {
+			direct.textContent = "East";
+		}
+		else {
+			direct.textContent = "North";
+		}
+
+		speed.textContent = Math.round(arrWeather[0].windSpeed) + " m/c";
+		nameAndTime.appendChild(nameDiv);
+		nameAndTime.appendChild(timeDiv);
+		temperature.appendChild(temprDiv);
 		arrWeather.map(function(item, index){
 		var itemWeather = createItemWeather(item);
 		bodyWeather.appendChild(itemWeather);
-	})
+		})
 	}
 	
 	}
