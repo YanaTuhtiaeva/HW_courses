@@ -4,7 +4,7 @@ var board = document.querySelector('.board');
 var btnAddNotes = document.querySelector('.btnAddNotes');
 var deleteBtn = document.querySelector('.deleteBtn');
 
-var notesArr = [];
+var notesArr = JSON.parse(localStorage.getItem("notesArr")) || [];
 var dragNote;
 var dragObj;
 var deltaX;
@@ -45,6 +45,7 @@ function createOneNoteMarkup(item, index){
      deleteBtn.onclick = function () {
         notesArr.splice(index, 1);
         updateMarkup();
+        localStorage.setItem("notesArr", JSON.stringify(notesArr));
     }
 
     tempNote.ondblclick = function addTextArea() {
@@ -61,6 +62,7 @@ function createOneNoteMarkup(item, index){
 			item.textArea = textAreaValue;
 			textArea.style.fontWeight = "bold";
             textArea.style.border = "none";
+            localStorage.setItem("notesArr", JSON.stringify(notesArr));
 		}
 		else{
 			textArea.style.borderColor = "red";
@@ -79,6 +81,7 @@ function getMouse(e){
     // запись координат в свойства объекта
     dragObj.posX = mouseX - deltaX;
     dragObj.posY = mouseY - deltaY;
+    localStorage.setItem("notesArr", JSON.stringify(notesArr));
 }
 
 function updateMarkup(){
@@ -87,6 +90,7 @@ function updateMarkup(){
     notesArr.map(function(item,index){
         var newNote = createOneNoteMarkup(item,index);
  		
+
         newNote.onmousedown = function(e){
             // добавить событие перетягивания 
             document.addEventListener('mousemove',getMouse);
@@ -109,8 +113,11 @@ function updateMarkup(){
 btnAddNotes.onclick = function(e){
     notesArr.push(new Note());
     updateMarkup();
+
+    localStorage.setItem("notesArr", JSON.stringify(notesArr));
+    
 }
 
-
+updateMarkup();
 
 });
